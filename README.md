@@ -34,9 +34,9 @@ python PerlinNoise.py
 ```
 
 ### References
-[Understanding Perlin Noise] (https://flafla2.github.io/2014/08/09/perlinnoise.html) Very good read, to gather some intuition and first hand knowleadge on 3D Perlin Noise, with code samples.
-[Improved Noise Implementation] (https://mrl.nyu.edu/~perlin/noise/) Implementation of the improved Noise generator, by Kim Perlin, in with I based this code sample.
-[The original Perlin Noise Paper] (http://delivery.acm.org/10.1145/330000/325247/p287-perlin.pdf?ip=84.89.157.24&id=325247&acc=ACTIVE%20SERVICE&key=DD1EC5BCF38B3699%2EBD9BF0B02D94E6D5%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1573040398_12472517b66c35499756dc7b57d7670e)
+* [Understanding Perlin Noise](https://flafla2.github.io/2014/08/09/perlinnoise.html) Very good read, to gather some intuition and first hand knowleadge on 3D Perlin Noise, with code samples.
+* [Improved Noise Implementation](https://mrl.nyu.edu/~perlin/noise/) Implementation of the improved Noise generator, by Kim Perlin, in with I based this code sample.
+* [The original Perlin Noise Paper](http://delivery.acm.org/10.1145/330000/325247/p287-perlin.pdf?ip=84.89.157.24&id=325247&acc=ACTIVE%20SERVICE&key=DD1EC5BCF38B3699%2EBD9BF0B02D94E6D5%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1573040398_12472517b66c35499756dc7b57d7670e)
 
 ### Bruh
 Bruh
