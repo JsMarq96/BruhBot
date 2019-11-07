@@ -8,7 +8,7 @@ from PerlinNoise import PerlinNoise
 
 CONFIG= {}
 CONFIG['T_CONSUMER_KEY'] = ''
-CONFIG['T_CONSUMER_KEY_SECR'] = ''
+CONFIG['T_CONSUMER_KEY'] = ''
 CONFIG['T_ACCESS_TOKEN'] = ''
 CONFIG['T_ACCESS_TOKEN_SECR'] = ''
 CONFIG['debug'] = True
@@ -20,10 +20,10 @@ def getTwittingFunction():
 	if CONFIG['debug']:
 		return print
 
-	twi_auth = tweepy.OAuthHandler(CONFIG['T_CONSUMER_KEY'], CONFIG['T_CONSUMER_KEY_SECR'])
+	twi_auth = tweepy.OAuthHandler(CONFIG['T_CONSUMER_KEY'], CONFIG['T_CONSUMER_KEY'])
 	twi_auth.set_access_token(CONFIG['T_ACCESS_TOKEN'], CONFIG['T_ACCESS_TOKEN_SECR'])
 
-	t_api = tweepy.API(twi_auth)
+	t_api = tweepy.auth(twi_auth)
 
 	return t_api.update_status
 
@@ -42,9 +42,17 @@ starting_val = uniform(0,0.5)
 # Main loop
 while True:
 	new_bruh = generator.getBruh(starting_val)
-	tweet(new_bruh)
+	
+	try:
+		tweet(new_bruh)
+	except tweepy.TweepError as error:
+		if error.api_code == 187:
+			print('Error, repeated tweet')
+		else:
+			raise(error)
+
 	print('He tuiteado ', new_bruh)
 
 	starting_val += 1
 
-	time.sleep(60 * 30)
+	time.sleep(1 * 30)
