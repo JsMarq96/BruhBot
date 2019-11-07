@@ -23,7 +23,7 @@ def getTwittingFunction():
 	twi_auth = tweepy.OAuthHandler(CONFIG['T_CONSUMER_KEY'], CONFIG['T_CONSUMER_KEY'])
 	twi_auth.set_access_token(CONFIG['T_ACCESS_TOKEN'], CONFIG['T_ACCESS_TOKEN_SECR'])
 
-	t_api = tweepy.auth(twi_auth)
+	t_api = tweepy.API(twi_auth)
 
 	return t_api.update_status
 
