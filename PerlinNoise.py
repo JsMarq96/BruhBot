@@ -17,10 +17,10 @@ class PerlinNoise:
 	'''
 		Custom implmentation to the (Improved) Perlin noise Algortihm
 		for didactical purposes.
-                The algorithm's main focus is to generate a random but smooth succession of numbers, and it
-                consists on a "grid" of random gradients, with unit distance between then, and the process
-                "fills" the gaps between the gradients, interpolating the values based on the distance to the
-                nearest gradients.
+				The algorithm's main focus is to generate a random but smooth succession of numbers, and it
+				consists on a "grid" of random gradients, with unit distance between then, and the process
+				"fills" the gaps between the gradients, interpolating the values based on the distance to the
+				nearest gradients.
 	'''
 	def __init__(self, seed_no = 100):
 		seed(seed_no)
@@ -49,11 +49,11 @@ class PerlinNoise:
 	def hashed_gradient(self, x_dist):
 		'''
 		Rewrite of the proposed perlin noise function into a more readable function
-                This function used the introduced distance to get a hash from the table, and then modify it, to appear
-                random.
-                The results are mappend in [-8, 8], without the 0
+		This function used the introduced distance to get a hash from the table, and then modify it, to appear
+		random.
+		The results are mappend in [-8, 8], without the 0
 		'''
-                # Retrieve a hash
+		# Retrieve a hash
 		hash_x = self.hashes[x_dist % 255] # In order to limit the range of the index to 0-255
 		# First we use the first 4 bits to delcare create the gradient
 		beta = hash_x & 0b1111 # We take the last 4 bits of the hash
@@ -67,9 +67,9 @@ class PerlinNoise:
 			return -grad
 
 	def calculate1D(self, x, smooth_func = smoothing, lin_interp = lerp):
-                '''
-                1D Implementation of the Improved Perlin Noise generator.
-                '''
+		'''
+		1D Implementation of the Improved Perlin Noise generator.
+		'''
 		# Get the corner's positions (unit distance)
 		p0 = math.floor(x)
 		p1 = p0 + 1
@@ -91,10 +91,10 @@ class PerlinNoise:
 		'''
 		Calculate the gradient with a more purer algorithm focused code
 		The original Perlin noise implementation, is more focused on perfomance
-                In the class we store the current corners, and the current gradients,
-                and just compute the random aspects on the fly
-                DISCLAIMER: This function only works when focusing on getting continued
-                values, if the step between calls is more than 2, it may not behave as intended
+		In the class we store the current corners, and the current gradients,
+		and just compute the random aspects on the fly
+		DISCLAIMER: This function only works when focusing on getting continued
+		values, if the step between calls is more than 2, it may not behave as intended
 		'''
 		# If we are abobe the current window of the Perlin noise, we slide and create another window
 		if x >= self.P1:
