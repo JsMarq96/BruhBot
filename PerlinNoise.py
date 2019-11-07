@@ -15,8 +15,12 @@ def smoothing(x):
 
 class PerlinNoise:
 	'''
-		Custom implmentation to the Perlin noise Algortihm (is it imporved??)
-		for didactical purposes
+		Custom implmentation to the (Improved) Perlin noise Algortihm
+		for didactical purposes.
+                The algorithm's main focus is to generate a random but smooth succession of numbers, and it
+                consists on a "grid" of random gradients, with unit distance between then, and the process
+                "fills" the gaps between the gradients, interpolating the values based on the distance to the
+                nearest gradients.
 	'''
 	def __init__(self, seed_no = 100):
 		seed(seed_no)
@@ -26,7 +30,7 @@ class PerlinNoise:
 		self.P0 = 0
 		self.P1 = 1
 
-		# Hashes of size 256 to avoid overflows
+		# Hashes of size 256, for pseudorandom gradient generation
 		# Defined by Kim Perlin in his Noise implementation
 		self.hashes = [ 151, 160, 137, 91, 90, 15,
 			131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23,
@@ -45,20 +49,27 @@ class PerlinNoise:
 	def hashed_gradient(self, x_dist):
 		'''
 		Rewrite of the proposed perlin noise function into a more readable function
+                This function used the introduced distance to get a hash from the table, and then modify it, to appear
+                random.
+                The results are mappend in [-8, 8], without the 0
 		'''
-		hash_x = self.hashes[x_dist % 255] # Limit the output to the range of 0-255
+                # Retrieve a hash
+		hash_x = self.hashes[x_dist % 255] # In order to limit the range of the index to 0-255
 		# First we use the first 4 bits to delcare create the gradient
-		beta = hash_x & 0b1111 # We use only the 4 last bits
-		grad = beta & 0b111 # For the acutal value of the gradient we just use the last 3 bytes nums from (0 to 7)
-		grad += 1.0 # We dont want the gradient to be 0
+		beta = hash_x & 0b1111 # We take the last 4 bits of the hash
+		grad = beta & 0b111 # Get the value of the gradient, with just the last 3 bytes of the hash, the range of this is (0 to 7)
+		grad += 1.0 # In order to avoid having a 0 value gradient. The range now is [1, 8]
 
-		# We use tha 4th byte to decide the sign of the gradient
+		# We use tha 4th byte to decide the sign of the gradient, expanding the range from [-8, -1] and [1, 8]
 		if (beta & 0b1000) != 0:
 			return grad
 		else:
 			return -grad
 
 	def calculate1D(self, x, smooth_func = smoothing, lin_interp = lerp):
+                '''
+                1D Implementation of the Improved Perlin Noise generator.
+                '''
 		# Get the corner's positions (unit distance)
 		p0 = math.floor(x)
 		p1 = p0 + 1
@@ -66,7 +77,7 @@ class PerlinNoise:
 		# Calculate the point relative to the gradients
 		d0 = x - p0
 
-		# Get the hased gradients
+		# Get the hashed gradients for each corner
 		grad_p0 = self.hashed_gradient(p0)
 		grad_p1 = self.hashed_gradient(p1)
 
@@ -80,8 +91,12 @@ class PerlinNoise:
 		'''
 		Calculate the gradient with a more purer algorithm focused code
 		The original Perlin noise implementation, is more focused on perfomance
+                In the class we store the current corners, and the current gradients,
+                and just compute the random aspects on the fly
+                DISCLAIMER: This function only works when focusing on getting continued
+                values, if the step between calls is more than 2, it may not behave as intended
 		'''
-		# If we are avode the current window of the Perlin noise, we create another window
+		# If we are abobe the current window of the Perlin noise, we slide and create another window
 		if x >= self.P1:
 			self.P0_mag = self.P1_mag
 			self.P1_mag = uniform(-1, 1)
@@ -91,7 +106,7 @@ class PerlinNoise:
 		# Calculate the point relative to the gradients
 		d0 = x - self.P0
 
-		# Calculate the point, as in the old function
+		# Calculate the point, as in the old function, but using the current window
 		return lin_interp(smooth_func(d0), self.P0_mag, self.P1_mag)
 
 
