@@ -18,6 +18,7 @@ I also included a more straight-forward implementation of the algorithm, in the 
 Both methods have been comented with a lot of detail, in order to provide some help undestanding both. 
 
 ### Python Dependencies
+- Tweepy (for tweeting)
 - Numpy
 - Random
 - Math
