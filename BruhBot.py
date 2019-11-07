@@ -11,7 +11,7 @@ CONFIG['T_CONSUMER_KEY'] = ''
 CONFIG['T_CONSUMER_KEY_SECR'] = ''
 CONFIG['T_ACCESS_TOKEN'] = ''
 CONFIG['T_ACCESS_TOKEN_SECR'] = ''
-CONFIG['debug'] = False
+CONFIG['debug'] = True
 
 def getTwittingFunction():
 	'''
