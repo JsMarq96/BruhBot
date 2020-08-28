@@ -3,7 +3,7 @@
 
 ### The project itself
 I have always wondered about procedurally generated content, so I wanted a quick project to toy arround and implement a noise function.
-In this proyect I programmed the Perlin Noise Generator, and a State Model (to force a coherent string structure), with probability associated transitions, like a Markov Chain. (Note: I did not feel confortable calling the State Model a Markov Chain, since the Noise generator have a memmory, and that MAYBE contradicts slightly the Markov Propierty.
+In this proyect I programmed the Perlin Noise Generator, and a State Model (to force a coherent string structure), with probability associated transitions, like a Markov Chain. 
 
 ### How
 First, we generate the State model transitions, in which each letter is a state, with transition to the next letter and itself.
